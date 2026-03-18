@@ -1,0 +1,221 @@
+/* Do not remove the @namespace line -- it's required for correct functioning */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* set default namespace to XUL */
+
+/*
+ * Hide tab bar, navigation bar and scrollbars
+ * !important may be added to force override, but not necessary
+ * #content is not necessary to hide scroll bars
+ */
+#TabsToolbar {visibility: collapse;}
+#navigator-toolbox {visibility: collapse;}
+browser {margin-right: -14px; margin-bottom: -14px;}
+
+#navigator-toolbox {
+  /* tabulation bar variables */
+  --kirefox-tab-height: 20px;
+  --kirefox-tab-width: 80px;
+  --kirefox-font-size: min(calc(var(--kirefox-tab-height) / 2), 18px);
+  --kirefox-tab-icon-height: 15px;
+  /* navigation bar variables */
+  --kirefox-nav-bar-height: 30px;
+  --kirefox-nav-bar-icon-height: 15px;
+}
+
+/* Kill bookmark icons in the Personal Toolbar */
+ toolbarbutton.bookmark-item > .toolbarbutton-icon {
+  display: none !important;
+}
+
+/* tabs */
+/* 
+ * Hide tab toolbar if only one tab is opened. 
+ * Thanks to @cor-el : https://support.mozilla.org/en-US/questions/1394300#answer-1565950
+ */
+#TabsToolbar:has(.tabbrowser-tab:only-of-type) {
+  display: none;
+}
+#TabsToolbar-customization-target {
+  height: var(--kirefox-tab-height);
+  * {
+    margin-top: 0 !important;
+    overflow: hidden !important;
+    border-radius: 0 !important;
+    min-height: 0 !important;
+  }
+}
+#tabbrowser-tabs {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  border-left: none !important;
+  &, .tab-stack {
+    height: var(--kirefox-tab-height);
+  }
+  .tabbrowser-tab[fadein]:not([pinned]) {
+    max-width: var(--kirefox-tab-width) !important;
+  }
+  .tab-content,
+  .tab-content .tab-label-container,
+  .tab-background {
+    height: var(--kirefox-tab-height);
+    font-size: var(--kirefox-font-size);
+    font-family: monospace;
+  }
+  &[haspinnedtabs] .tabbrowser-tab {
+    margin-inline-start: 0 !important;
+  }
+  .tab-content[selected]:not([pinned]) {
+    padding-right: 0 !important;
+  }
+  .tab-close-button {
+    --kirefox-temp-tab-close-width: calc(var(--kirefox-tab-icon-height) * 0.6);
+    --kirefox-temp-tab-close-padding: calc(var(--kirefox-tab-icon-height) - var(--kirefox-temp-tab-close-width));
+    width: var(--kirefox-temp-tab-close-width) !important;
+    box-sizing: content-box !important;
+    padding: 0 var(--kirefox-temp-tab-close-padding) !important;
+    margin: 0 !important;
+  }
+  .tab-icon-image {
+    height: var(--kirefox-tab-icon-height) !important;
+    width: var(--kirefox-tab-icon-height) !important;
+  }
+  .tab-content:hover .tab-icon-stack:is([sharing], [pinned], [soundplaying], [muted]) {
+    .tab-icon-overlay {
+      display: none !important;
+      max-height: var(--kirefox-tab-icon-height) !important;
+      max-width: var(--kirefox-tab-icon-height) !important;
+    }
+    .tab-icon-image {
+      opacity: 1 !important;
+    }
+    &:hover {
+      .tab-icon-image {
+        display: none;
+      }
+      .tab-icon-overlay {
+        display: revert !important;
+        top: 0 !important;
+        inset-inline-end: 0 !important;
+        fill-opacity: 0.75;
+        &:hover {
+          background-color: color-mix(in srgb, currentColor 15%, transparent) !important;
+          stroke: transparent !important;
+          fill-opacity: 0.95 !important;
+        }
+      }
+    }
+  }
+}
+#tabbrowser-tabs .tab-secondary-label,
+.tab-content .tab-icon-overlay {
+  display: none;
+}
+:is(#tabs-newtab-button, #new-tab-button) {
+  margin-bottom: 0px !important;
+  image {
+    height: var(--kirefox-tab-icon-height) !important;
+    width: var(--kirefox-tab-icon-height) !important;
+    box-sizing: content-box !important;
+    padding: 5px !important;
+  }
+}
+#scrollbutton-up,
+#scrollbutton-down {
+  box-sizing: content-box !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+#alltabs-button {
+  display: none;
+}
+
+/* nav bar */
+/* all things that I found useless */
+#firefox-view-button,
+#stop-reload-button,
+#home-button,
+#save-to-pocket-button,
+#fxa-toolbar-menu-button,
+#customizableui-special-spring1,
+#customizableui-special-spring2,
+#downloads-button,
+#tracking-protection-icon-container,
+#identity-icon-box,
+#identity-box,
+#urlbar-go-button {
+  display: none;
+}
+/* all page actions buttons, except bookmark */
+#contextual-feature-recommendation,
+#userContext-icons,
+#reader-mode-button,
+#picture-in-picture-button,
+#translations-button,
+#shopping-sidebar-button,
+#urlbar-zoom-button,
+#pageActionButton {
+  display: none;
+}
+#nav-bar-overflow-button,
+.urlbarView .search-one-offs {
+  display: none !important;
+}
+#nav-bar-customization-target * {
+  border-radius: 0 !important;
+}
+#nav-bar {
+  height: var(--kirefox-nav-bar-height);
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+#urlbar-container {
+  padding: 0 !important;
+  box-sizing: content-box;
+  --kirefox-temp-nav-bar-urlbar-height: calc(var(--kirefox-nav-bar-height) * 0.75);
+}
+#urlbar {
+  min-height: var(--kirefox-temp-nav-bar-urlbar-height) !important;
+  top: calc(var(--kirefox-nav-bar-height) / 8) !important;
+  &:not([open]) #urlbar-background, #urlbar-input-container {
+    height: var(--kirefox-temp-nav-bar-urlbar-height) !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+  &[open] #urlbar-input-container {
+    height: var(--kirefox-temp-nav-bar-urlbar-height) !important;
+  }
+  #urlbar-input {
+    padding-left: 5px !important;
+  }
+}
+#PanelUI-menu-button {
+  padding: 0 !important;
+}
+#PanelUI-menu-button slack,
+#forward-button,
+#back-button,
+#unified-extensions-button {
+  padding: 0 !important;
+  min-height: var(--kirefox-nav-bar-height) !important;
+}
+:is(#PanelUI-menu-button, #forward-button, 
+    #back-button, #unified-extensions-button) .toolbarbutton-icon {
+  max-width: var(--kirefox-nav-bar-icon-height) !important;
+  min-height: var(--kirefox-nav-bar-height) !important;
+  border-radius: 0 !important;
+  box-sizing: content-box !important;
+}
+#star-button-box {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: var(--kirefox-temp-nav-bar-urlbar-height) !important;
+  justify-content: center;
+  align-items: center;
+}
+#star-button-box image {
+  height: calc(var(--kirefox-nav-bar-icon-height) * 0.85) !important;
+  border-radius: 0 !important;
+}
+#unified-extensions-button {
+  order: 1
+
+}

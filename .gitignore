@@ -1,0 +1,10 @@
+.vscode
+debug*
+/tmp
+*.exe
+ignore
+__pycache__
+.pytest_cache
+.nicegui
+python/
+r3dfox/
