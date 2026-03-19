@@ -36,10 +36,6 @@ def ui_examtimer() -> None:
     pass
 
 
-def logout():
-    ui.navigate.to("/logout")
-
-
 # here we use our custom page decorator directly and just put the content creation into a separate function
 @contextmanager
 def frame(navtitle: str):
@@ -63,7 +59,9 @@ def frame(navtitle: str):
         ui.label("Assessment Marking Tool").style("font-size: 200%").classes(
             "absolute-center"
         )
-        ui.button(on_click=logout, icon="logout").props("outline round")
+        ui.button(on_click=lambda: ui.navigate.to("/logout"), icon="logout").props(
+            "outline round"
+        )
 
     with ui.footer(value=True).classes("bg-blue-100").style(
         "border-left: 4px solid #6E93D6"
