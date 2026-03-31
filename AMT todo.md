@@ -20,6 +20,9 @@
   - GET /report/learner/:filter - grades by learner
   - 
 
+
+- add code to create the data/[year]/[semester] for the examination
+  
 ### other
 
 **LOC counter**
