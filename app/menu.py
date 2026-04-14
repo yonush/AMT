@@ -3,10 +3,9 @@ build the left side bar menus based on the current route.
 
 """
 
+from exam import Exam  # main assessment/exam driver
 from loguru import logger
 from nicegui import ui
-
-from exam import Exam  # main assessment/exam driver
 
 # if the menu is created outside of this page in the case of pages/exam.py
 external_menu: list[list] = []
@@ -25,11 +24,37 @@ def main_menu() -> None:
         links = [
             ["← Home", "/#"],
         ]
+    elif "/builder" in stub:
+        links = [
+            ["New exam", "/newexam"],
+            ["Manage Exam", "/manexam"],
+            ["Archive Exam", "/archexam"],
+            ["_______", ""],
+            ["← Home", "/#"],
+        ]
+    elif "/marker" in stub:
+        links = [
+            ["List Unmarked", "/examunmarked"],
+            ["Premark Exams", "/exampremark"],
+            ["Manual Mark", "/exammanual"],
+            ["Backup Exams", "/exambackup"],
+            ["_______", ""],
+            ["← Home", "/#"],
+        ]
+    elif "/reports" in stub:
+        links = [
+            ["Current Exams", "/rptexam"],
+            ["Exams by Course", "/rptcourse"],
+            ["Grades by Learner", "/rptgrades"],
+            ["_______", ""],
+            ["← Home", "/#"],
+        ]
+
     else:
         links = [
-            ["Mark\nexams ➡", "/#"],
-            ["Exam\nbuilder", "/#"],
-            ["Reports", "/#"],
+            ["Mark exams ➡", "/marker"],
+            ["Exam builder ➡", "/builder"],
+            ["Reports ➡", "/reports"],
             ["_______", ""],
             ["Logout", "/logout"],
             ["Shutdown", "/shutdown"],

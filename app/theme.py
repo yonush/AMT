@@ -13,10 +13,9 @@ Theme used for all of the page content
 from contextlib import contextmanager
 from time import localtime
 
-from nicegui import html, ui
-
 import menu
 from exam import Exam  # main assessment/exam driver
+from nicegui import app, html, ui
 
 left_drawer: ui.left_drawer
 
@@ -39,7 +38,9 @@ def ui_examtimer() -> None:
 # here we use our custom page decorator directly and just put the content creation into a separate function
 @contextmanager
 def frame(navtitle: str):
-    Exam.sessionLoad()
+    # Exam.sessionLoad()
+    username = app.storage.user.get("username", "")
+
     """Custom page frame to share the same styling and behavior across all pages"""
     ui.query("html").style("overflow-y: scroll;")
     ui.colors(
@@ -70,8 +71,8 @@ def frame(navtitle: str):
             ui.label("Copyright © 2026 EIT ").style("color: #27408B;")
             ui.space()
             if Exam.isAuthenticated:
-                ui.label(f"LOGGED IN TO {Exam.assessmentid} AS {Exam.studentid}").style(
-                    "color: #008080;font-size: 130%; font-weight: 700"
+                ui.label(f"Logged in as {username}").style(
+                    "color: #008080;font-size: 110%; font-weight: 700"
                 )
             else:
                 ui.label("LOGGED OUT").style(

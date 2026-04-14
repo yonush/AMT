@@ -33,7 +33,7 @@ isFullscreen = False
 exam.Exam = exam.Assessment()
 Exam = exam.Exam
 
-passwords = {"user1": "pass1", "user2": "pass2"}
+passwords = {"admin": "password", "user": "password"}
 unrestricted_page_routes = {"/login", "/logout"}
 
 
