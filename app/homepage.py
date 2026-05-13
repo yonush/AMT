@@ -39,50 +39,22 @@ def content() -> None:
             ui.navigate.to(f"/examlist")
 
     with ui.card().classes("fixed-center").style("border-left: 4px solid #6E93D6"):
-        if Exam.isAuthenticated and not Exam.isExpired:
-            with ui.row().classes("w-full").props("height=85"):
-                ui.restructured_text(
-                    """
-                    To successfully log out of the current assessment,
-                    you **must** click 'Continue exam' then 'Logout'.
-                    This will ensure your assessment is properly saved.                                     
-                                     """
-                ).style("color: #8B0000;font-size: 130%; font-weight: 700")
 
-        ui.restructured_text(
-            """ 
-                Instructions:
+        ui.restructured_text(""" 
+                Quick help:
 
-                - This is a closed book exam. 
-                - Answer all the questions in English, in the areas provided.
-                - No unauthorised resources or communication with others are allowed. 
-                - You MUST answer ALL questions.
-                - Answer the questions in the areas provided.
-                - Use of the Internet is NOT permitted. 
-                - Activity is monitored during the exam.
+                - Use the "Mark Exams" menu to manually and automark exams - bulk and individual.
+                - Use the "Exam Builder" menu to create and manage individual exam offerings. 
+                - Use the Reports menu to generate class lists, grades and active exam offerings. 
+                - Use the Admin menu for settings, password changes, etc.
 
-                指示：
+                
+                """).style("font-size: 120%; font-weight: 700")
 
-                - 这是一个闭卷考试
-                - 在提供的区域用英语回答所有问题
-                - 不允许使用未经授权的资源或与他人通信
-                - 您必须回答所有问题
-                - 不允许使用互联网
-                - 考试期间监控活动
-                """
-        ).style("font-size: 120%; font-weight: 700")
-
-        ui.html("&nbsp;&nbsp;&nbsp;&nbsp;",sanitize=False)  # lazy spacer :)
+        ui.html("&nbsp;&nbsp;&nbsp;&nbsp;", sanitize=False)  # lazy spacer :)
         ui.separator()
         with ui.card_section():
             with ui.row():
-
-                ui.button(
-                    "Continue with exam/继续考试",
-                    icon="assessment",
-                    # on_click=lambda: try_nav(),
-                    on_click=lambda: ui.navigate.to(f"/trylogin"),
-                ).tooltip("Start with the examination").classes(replace="text-black")
 
                 ui.button(
                     "Shutdown/关闭",

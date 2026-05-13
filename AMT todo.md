@@ -12,6 +12,7 @@ Need to include faculty/academic role to only show relevant exams for the logged
 
 - AMT: link the auth to the ADS - update auth middleware handler (main.py)
   - https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/ 
+
 - AMT: map out proposed routes
   - > Builder
     - New exam: (local) Create a new exam with the option to copy existing exam
@@ -23,6 +24,7 @@ Need to include faculty/academic role to only show relevant exams for the logged
     - GET   /build/exam/:examid - retrieve exam to edit
     - POST  /build/exam/:examid - save new exam
     - PUT   /build/exam/:examid - update exam
+    - DELETE /build/exam/:examid - remove an exam (single exam at a time)
 
   - > Marker
     - List Unmarked: (remote) Show all unmarked exams by course. (remote) Includes bulk download by course.
@@ -42,6 +44,7 @@ Need to include faculty/academic role to only show relevant exams for the logged
     - GET /report/exams/:filter - exams in the system
     - GET /report/course/:filter - exams by course
     - GET /report/learner/:filter - grades by learner
+ 
   - Admin
     - Refresh course lists (remote > local)
     - Server settings (local)

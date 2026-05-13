@@ -49,12 +49,20 @@ def main_menu() -> None:
             ["_______", ""],
             ["← Home", "/#"],
         ]
-
+    elif "/admin" in stub:
+        links = [
+            ["Refresh courses", "/rptexam"],
+            ["Settings", "/settings"],
+            ["Change password", "/passwords"],
+            ["_______", ""],
+            ["← Home", "/#"],
+        ]
     else:
         links = [
             ["Mark exams ➡", "/marker"],
             ["Exam builder ➡", "/builder"],
             ["Reports ➡", "/reports"],
+            ["Admin ➡", "/admin"],
             ["_______", ""],
             ["Logout", "/logout"],
             ["Shutdown", "/shutdown"],
